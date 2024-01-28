@@ -1,0 +1,15 @@
+[_]
+id = "kvs-example"
+schema-version = "0.2"
+
+[io.buildpacks]
+exclude = [
+  "*~",
+  "*.bak",
+  "/.bundle",
+  "/.git",
+  "/buildpacks",
+  "/extensions",
+  "/db",
+  "/vendor"
+]

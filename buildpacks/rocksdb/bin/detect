@@ -1,0 +1,12 @@
+#! /bin/sh
+
+plan_path=$2
+
+echo "RocksDB Buildpack enabled."
+
+cat >>"${plan_path}" <<EOL
+[[requires]]
+name = "rocksdb-extension"
+EOL
+
+exit 0

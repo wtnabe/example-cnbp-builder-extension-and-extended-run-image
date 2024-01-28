@@ -1,0 +1,10 @@
+#! /bin/sh
+
+docker build -t google-22-extended-run-image -f dockerfiles/run.Dockerfile dockerfiles/
+
+#
+# not work below with "could not parse reference" error
+#
+# docker build -t heroku-22-extendable-builder-image -f dockerfiles/builder.heroku.Dockerfile dockerfiles/ 
+# docker build -t google-22-extendable-builder-image -f dockerfiles/builder.google.Dockerfile dockerfiles/ 
+#

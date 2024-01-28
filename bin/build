@@ -1,0 +1,14 @@
+#! /bin/sh
+
+pack build kvs-example \
+     -B gcr.io/buildpacks/builder:google-22 \
+     --run-image google-22-extended-run-image \
+     --pre-buildpack ./buildpacks/rocksdb \
+     --pre-buildpack ./buildpacks/gdbm \
+     --extension extensions/rocksdb \
+     --extension extensions/gdbm
+
+#     -B heroku-22-extendable-builder-image　<- could not parse reference
+#     -B google-22-extendable-builder-image　<- could not parse reference
+#     -B heroku/builder:22 <- Not supported pre-buildpack and extension
+#     -B gcr.io/buildpacks/builder:google-22 \

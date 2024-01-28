@@ -1,0 +1,12 @@
+#! /bin/sh
+
+plan_path=$2
+
+echo "GDBM Buildpack enabled."
+
+cat >>"${plan_path}" <<EOL
+[[requires]]
+name = "gdbm-extension"
+EOL
+
+exit 0

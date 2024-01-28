@@ -1,0 +1,6 @@
+api = "0.10"
+
+[extension]
+id = "gdbm-extension"
+name = "GDBM extension"
+version = "0.1"

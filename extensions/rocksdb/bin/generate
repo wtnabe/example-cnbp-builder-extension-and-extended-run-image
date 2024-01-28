@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+# 1. GET ARGS
+output_dir=$CNB_OUTPUT_DIR
+
+# 2. append tool for Dockerfile
+cat >>"${output_dir}/build.Dockerfile" <<EOL
+ARG base_image
+FROM \${base_image}
+
+USER root
+RUN apt-get update && apt-get -y install rocksdb-tools librocksdb-dev
+
+ARG user_id
+USER \${user_id}
+EOL

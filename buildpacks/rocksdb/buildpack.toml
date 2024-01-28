@@ -1,0 +1,8 @@
+api = "0.10"
+
+[buildpack]
+id = "rocksdb"
+version = "0.1"
+
+[[targets]]
+os = "linux"
