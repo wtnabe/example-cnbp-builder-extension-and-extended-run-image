@@ -8,10 +8,11 @@ DEFAULT_STORE_COUNT = 500
 # @param [Integer] count
 #
 def main(type, count)
+  content = random_1kb_content
   store = Store.init(type.to_sym)
   
   (1..count).each { |e|
-    store[e.to_s] = random_1kb_content
+    store[e.to_s] = content
   }
 end
 
@@ -24,9 +25,7 @@ end
 # @return [String]
 #
 def random_1kb_content
-  (1..Util::KILO).to_a.map { |e|
-    Random.rand(32..126).chr
-  }.join
+  Util::random_contents(1 * Util::KILO)
 end
 
 if __FILE__ == $0
