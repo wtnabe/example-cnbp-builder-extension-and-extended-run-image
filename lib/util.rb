@@ -1,6 +1,7 @@
 module Util
   KILO = 1024
   MEGA = KILO ** 2
+  DEFAULT_COUNT = 500 * KILO
 
   #
   # @param [Integer] size

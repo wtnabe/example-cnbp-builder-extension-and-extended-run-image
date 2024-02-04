@@ -1,3 +1,3 @@
-require_relative "./app/router"
+require_relative "./app/web"
 
 run Sinatra::Application

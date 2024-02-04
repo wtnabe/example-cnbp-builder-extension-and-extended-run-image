@@ -10,8 +10,8 @@ gem "rocksdb-ruby"
 gem "sinatra"
 gem "puma"
 gem "interactor", "~> 3.1"
+gem "thor"
 
 group :development do
   gem "rerun"
 end
-

@@ -32,6 +32,7 @@ GEM
       rack-protection (= 4.0.0)
       rack-session (>= 2.0.0, < 3)
       tilt (~> 2.0)
+    thor (1.3.0)
     tilt (2.3.0)
 
 PLATFORMS
@@ -44,6 +45,7 @@ DEPENDENCIES
   rerun
   rocksdb-ruby
   sinatra
+  thor
 
 RUBY VERSION
    ruby 3.2.2p53

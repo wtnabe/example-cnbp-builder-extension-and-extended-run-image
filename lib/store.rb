@@ -7,7 +7,7 @@ module Store
   end
 
   def self.init(type)
-    case type
+    case type.to_sym
     when :dbm
       require_relative './stores/dbm'
       Store::DBM.new
