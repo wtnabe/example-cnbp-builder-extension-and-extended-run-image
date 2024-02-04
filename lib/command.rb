@@ -9,7 +9,8 @@ class Command
   #
   # @param [String] type
   #
-  def initialize(type = :gdbm)
+  def initialize(type = :gdbm, with_bench = false)
+    @with_bench = with_bench
     @type = type.to_s.sub(/\A:+/, '').to_sym
     @store = Store.init(type)
   end
@@ -37,13 +38,45 @@ class Command
 
   #
   # @param [Interger] count
+  # @param [Proc] block
   #
-  def sequential_write(count)
+  def bench(count, &block)
+    previous = caller(1, 1).first
+    message_base = "#{@type}, #{count}"
+    message =
+      if previous.split(':').first == __FILE__ && previous =~ /`(.+)'\z/
+        "#{$1}: #{message_base}"
+      else
+        message_base
+      end
+
+    Benchmark.benchmark(message) do |x|
+      x.report do
+        block.call
+      end
+    end
+  end
+
+  #
+  # @param [Interger] count
+  # @param [Boolean] with_bench
+  #
+  def sequential_write(count, with_bench = @with_bench)
     content = Util::random_contents(CONTENT_SIZE)
-    puts starting_message(calc_count(count))
-    
-    (1..calc_count(count)).each { |e|
-      @store[e.to_s] = content
+
+    code = -> {
+      (1..calc_count(count)).each { |e|
+        @store[e.to_s] = content
+      }
     }
+
+    if with_bench
+      bench(count) do
+        code.call
+      end
+    else
+      puts starting_message(calc_count(count))
+      code.call
+    end
   end
 end
