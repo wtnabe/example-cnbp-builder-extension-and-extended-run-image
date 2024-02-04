@@ -60,8 +60,9 @@ class Command
   #
   # @param [Interger] count
   # @param [Boolean] with_bench
+  # @param [Boolean] with_message
   #
-  def sequential_write(count, with_bench = @with_bench)
+  def sequential_write(count, with_bench: @with_bench, with_message: true)
     content = Util::random_contents(CONTENT_SIZE)
 
     code = -> {
@@ -71,6 +72,37 @@ class Command
     }
 
     if with_bench
+      bench(count) do
+        code.call
+      end
+    else
+      puts starting_message(calc_count(count)) if with_message
+      code.call
+    end
+  end
+
+  #
+  # @param [Interger] count
+  #
+  def random_read(count, read_once: false)
+#    sequential_write(count, with_bench: false, with_message: false)
+
+    code =
+      if read_once
+        -> {
+          d = @store[(rand(calc_count(count)) + 1).to_s]
+          d = nil
+        }
+      else
+        -> {
+          (1..calc_count(count)).to_a.shuffle.each { |e|
+            d = @store[e.to_s]
+            d = nil
+          }
+        }
+      end
+
+    if @with_bench
       bench(count) do
         code.call
       end

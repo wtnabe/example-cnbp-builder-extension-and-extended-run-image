@@ -14,6 +14,12 @@ class Cli < Thor
   def sequential_write(count = 500)
     init.sequential_write(count)
   end
+
+  desc 'random-read COUNT', 'random read'
+  method_options read_once: :boolean
+  def random_read(count = 500)
+    init.random_read(count, read_once: options[:read_once])
+  end
 end
 
 if __FILE__ == $0
